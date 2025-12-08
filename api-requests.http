@@ -1,0 +1,75 @@
+### Variables
+@baseUrl = http://localhost:3000
+@starshipId = 1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p
+
+### 1. Récupérer tous les vaisseaux
+GET {{baseUrl}}/starships
+
+### 2. Récupérer un vaisseau par ID
+GET {{baseUrl}}/starships/{{starshipId}}
+
+### 3. Créer un nouveau vaisseau
+POST {{baseUrl}}/starships
+Content-Type: application/json
+
+{
+  "name": "Normandy SR-2",
+  "model": "Systems Alliance",
+  "crew": 30,
+  "status": "operational"
+}
+
+### 4. Créer un autre vaisseau
+POST {{baseUrl}}/starships
+Content-Type: application/json
+
+{
+  "name": "TARDIS",
+  "model": "Type 40",
+  "crew": 1,
+  "status": "operational"
+}
+
+### 5. Mettre à jour un vaisseau
+PUT {{baseUrl}}/starships/{{starshipId}}
+Content-Type: application/json
+
+{
+  "status": "maintenance",
+  "crew": 950
+}
+
+### 6. Mettre à jour seulement le statut
+PUT {{baseUrl}}/starships/{{starshipId}}
+Content-Type: application/json
+
+{
+  "status": "damaged"
+}
+
+### 7. Supprimer un vaisseau
+DELETE {{baseUrl}}/starships/{{starshipId}}
+
+### 8. Tester la validation - Statut invalide (doit échouer)
+POST {{baseUrl}}/starships
+Content-Type: application/json
+
+{
+  "name": "Invalid Ship",
+  "model": "Test",
+  "crew": 100,
+  "status": "invalid_status"
+}
+
+### 9. Tester la validation - Champ manquant (doit échouer)
+POST {{baseUrl}}/starships
+Content-Type: application/json
+
+{
+  "name": "Incomplete Ship",
+  "model": "Test"
+}
+
+### 10. Récupérer un vaisseau inexistant (doit échouer)
+GET {{baseUrl}}/starships/non-existent-id
+
